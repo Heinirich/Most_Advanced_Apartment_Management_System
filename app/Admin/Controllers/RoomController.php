@@ -28,6 +28,7 @@ class RoomController extends AdminController
         $grid->model()->latest();
         $grid->column('id', __('Id'));
         $grid->column('name', __('Name'));
+        $grid->column('room_slug', __('Room Identifier Number(RIN)'));
         $grid->column('price', __('Price'));
         $grid->column('image', __('Image'))->image(config('filesystem.admin.url'),50,50);
         //$grid->column('details', __('Details'));
@@ -80,7 +81,7 @@ class RoomController extends AdminController
         $form->textarea('details', __('Details'));
         $form->switch('status', __('Status'))->default('1');
         $form->saving(function (Form $form) {
-            $form->slug = "random";
+            $form->room_slug = strtoupper(uniqid());
         });
 
         return $form;
