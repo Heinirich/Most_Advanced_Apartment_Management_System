@@ -7,6 +7,7 @@ use Encore\Admin\Controllers\Dashboard;
 use Encore\Admin\Layout\Column;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Layout\Row;
+use Encore\Admin\Widgets\InfoBox;
 
 class HomeController extends Controller
 {
@@ -14,21 +15,16 @@ class HomeController extends Controller
     {
         return $content
             ->title('Dashboard')
-            ->description('Description...')
-            ->row(Dashboard::title())
+            ->description('Welcome to the admin Dashboard')
             ->row(function (Row $row) {
-
-                $row->column(4, function (Column $column) {
-                    $column->append(Dashboard::environment());
-                });
-
-                $row->column(4, function (Column $column) {
-                    $column->append(Dashboard::extensions());
-                });
-
-                $row->column(4, function (Column $column) {
-                    $column->append(Dashboard::dependencies());
+                $row->column(3, function (Column $column) {
+                    $this->displayInfoBox('Tenants', 'users', 'green', '/admin/tenants', count(Bam_Tenants("all")),$column);  
                 });
             });
+    }
+    
+    public function displayInfoBox($title,$logo,$color,$url,$data=0,$column){
+        $infoBox =  new InfoBox($title,$logo,$color,$url,$data);
+        return $column->append($infoBox->render());
     }
 }

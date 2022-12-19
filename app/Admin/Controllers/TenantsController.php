@@ -73,9 +73,13 @@ class TenantsController extends AdminController
 
         
         $form = new Form(new User());
+        $userTable = 'users';
+        $connection = config('admin.database.connection');
 
         $form->text('name', __('Name'));
-        $form->email('email', __('Email'));
+        $form->email('email', __('Email'))
+            ->creationRules(['required', "unique:{$connection}.{$userTable}"])
+            ->updateRules(['required', "unique:{$connection}.{$userTable},email,{{id}}"]);
         //$form->datetime('email_verified_at', __('Email verified at'))->default(date('Y-m-d H:i:s'));
         $form->password('password', __('Password'));
         $form->text('remember_token', __('Remember token'));

@@ -16,5 +16,9 @@ Route::group([
      * All Tenants Routes
      */
     $router->resource('tenants', TenantsController::class);
+    /**
+     * All Announcements Routes
+     */
+    $router->resource('announcements', AnnouncementController::class);
 
 });
