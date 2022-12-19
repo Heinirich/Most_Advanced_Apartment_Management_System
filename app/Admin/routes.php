@@ -20,5 +20,9 @@ Route::group([
      * All Announcements Routes
      */
     $router->resource('announcements', AnnouncementController::class);
+    /**
+     * All Rooms Routes
+     */
+    $router->resource('rooms', RoomController::class);
 
 });
