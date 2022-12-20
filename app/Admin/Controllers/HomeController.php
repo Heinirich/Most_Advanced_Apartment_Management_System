@@ -23,6 +23,9 @@ class HomeController extends Controller
                 $row->column(3, function (Column $column) {
                     $this->displayInfoBox('Rooms', 'user', 'black', '/admin/rooms', count(Bam_Tenants("all")),$column);  
                 });
+                $row->column(3, function (Column $column) {
+                    $this->displayInfoBox('Balance', 'dollar', 'green', '/admin/mpesa-transactions', Bam_Transactions("last"),$column);  
+                });
             });
     }
     

@@ -24,5 +24,9 @@ Route::group([
      * All Rooms Routes
      */
     $router->resource('rooms', RoomController::class);
+    /**
+     * All MPESA Routes
+     */
+    $router->resource('mpesa-transactions', MpesaTransactionController::class);
 
 });

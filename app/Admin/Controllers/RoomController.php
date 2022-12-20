@@ -68,6 +68,7 @@ class RoomController extends AdminController
      */
     protected function form()
     {
+
         $form = new Form(new Room());
 
         $roomTable = 'rooms';
@@ -76,14 +77,12 @@ class RoomController extends AdminController
         $form->text('name', __('Name'))
             ->creationRules(['required', "unique:{$connection}.{$roomTable}"])
             ->updateRules(['required', "unique:{$connection}.{$roomTable},username,{{id}}"]);
+        $form->text('room_slug', __('Slug'))->value(strtoupper(Bam_GenerateKey(15,15)))->readonly();
         $form->text('price', __('Price'));
         $form->image('image', __('Image'))->default('images/default.png');
         $form->textarea('details', __('Details'));
         $form->switch('status', __('Status'))->default('1');
-        $form->saving(function (Form $form) {
-            $form->room_slug = strtoupper(uniqid());
-        });
-
+        
         return $form;
     }
 }
