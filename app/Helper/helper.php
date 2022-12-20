@@ -60,7 +60,13 @@
         }
         return $key;
     }
-
+    
+    /**
+     * Bam_Transactions
+     *
+     * @param  mixed $type
+     * @return void
+     */
     function Bam_Transactions($type = "all")
     {
         if ($type = "last") {
