@@ -8,6 +8,8 @@ use Encore\Admin\Layout\Column;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Layout\Row;
 use Encore\Admin\Widgets\InfoBox;
+use Encore\Admin\Widgets\Table;
+use Encore\Admin\Widgets\Box;
 
 class HomeController extends Controller
 {
@@ -40,6 +42,21 @@ class HomeController extends Controller
                 });
                 $row->column(3, function (Column $column) {
                     $this->displayInfoBox('Open Complains', 'users', 'green', '/admin/complains', count(Bam_Complains("solved")),$column);  
+                });
+                $row->column(12, function (Column $column) {
+                    
+                    $headers = ['Name','Number','Transaction Code','Amount','Time'];
+                    $trans_data = array();
+                    foreach(Bam_Transactions('latest') as $trans){
+                        $trans_data[] = array('name'=>$trans->FirstName.' '.$trans->MiddleName,'number'=>$trans->MSISDN,'number'=>$trans->TransID,'amount'=>$trans->TransAmount,'time'=> date('d - m - Y  (h:i)',strtotime($trans->TransTime)));
+                    }
+                    $rows = $trans_data;
+                    $table = new Table($headers, $rows);
+                    $box = new Box('Latetst 10 Transactions', $table->render());
+                    $box->removable();
+                    $box->style('info');
+                    $box->solid();
+                    $column->append($box);
                 });
             });
     }

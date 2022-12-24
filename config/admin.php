@@ -11,7 +11,7 @@ return [
     | login page.
     |
     */
-    'name' => 'Bambanet-Hostels',
+    'name' => 'Bambanet-Homes',
 
     /*
     |--------------------------------------------------------------------------
@@ -22,7 +22,7 @@ return [
     | `img` tag, eg '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo' => '<b>Bambanet</b> hostels',
+    'logo' => '<b>Bambanet</b> Homes',
 
     /*
     |--------------------------------------------------------------------------

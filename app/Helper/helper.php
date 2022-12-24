@@ -87,7 +87,7 @@
      * @param  mixed $type
      * @return void
      */
-    function Bam_Transactions($type = "all")
+    function Bam_Transactions($type = "all",$num = 10)
     {
         if ($type == "lastbalance") {
             $data = \DB::table('mpesa_transactions')->latest()->pluck('OrgAccountBalance')->first() ?? 0;
@@ -95,6 +95,8 @@
         }else if($type == "lastdaily") {
             $data = \DB::table('mpesa_transactions')->where('created_at', '>=', \Carbon\Carbon::now()->subDay()->toDateTimeString())->sum('TransAmount') ?? 0;
             $data = 'Ksh.'.$data;
+        }else if($type == 'latest'){
+            $data = \DB::table('mpesa_transactions')->latest()->take($num)->get();
         }
         return $data;
     }
