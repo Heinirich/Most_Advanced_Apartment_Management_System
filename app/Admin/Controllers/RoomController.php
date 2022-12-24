@@ -26,6 +26,9 @@ class RoomController extends AdminController
     {
         $grid = new Grid(new Room());
         $grid->model()->latest();
+        $grid->quickSearch(function ($model, $query) {
+            $model->where('name', 'like',"%{$query}%")->orWhere('room_slug', 'like', "%{$query}%");
+        });
         $grid->column('id', __('Id'));
         $grid->column('name', __('Name'));
         $grid->column('room_slug', __('Room Identifier Number(RIN)'));
@@ -73,12 +76,12 @@ class RoomController extends AdminController
 
         $roomTable = 'rooms';
         $connection = config('admin.database.connection');
-
         $form->text('name', __('Name'))
             ->creationRules(['required', "unique:{$connection}.{$roomTable}"])
             ->updateRules(['required', "unique:{$connection}.{$roomTable},username,{{id}}"]);
-        $form->text('room_slug', __('Slug'))->value(strtoupper(Bam_GenerateKey(15,15)))->readonly();
-        $form->text('price', __('Price'));
+        $form->text('room_slug', __('Slug'))->value(strtoupper(Bam_GenerateKey(5,5)))
+            ->creationRules(['required', "unique:{$connection}.{$roomTable}"]);
+        $form->number('price', __('Price'));
         $form->image('image', __('Image'))->default('images/default.png');
         $form->textarea('details', __('Details'));
         $form->switch('status', __('Status'))->default('1');

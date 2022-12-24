@@ -18,6 +18,26 @@
     {
         if($type == 'all'){
             $data = DB::table('users')->get();
+        }else if($type == 'plucked'){
+            $data = DB::table('users')->get()->pluck('name','id');
+        }
+        return $data;
+        # code...
+    }
+    
+    /**
+     * Bam_Rooms
+     *
+     * @param  mixed $type
+     * @param  mixed $id
+     * @return void
+     */
+    function Bam_Rooms($type = null,$id = null)
+    {
+        if($type == 'all'){
+            $data = DB::table('rooms')->get();
+        }else if($type == 'plucked'){
+            $data = DB::table('rooms')->get()->pluck('name','id');
         }
         
         return $data;
@@ -69,9 +89,48 @@
      */
     function Bam_Transactions($type = "all")
     {
-        if ($type = "last") {
+        if ($type == "lastbalance") {
             $data = \DB::table('mpesa_transactions')->latest()->pluck('OrgAccountBalance')->first() ?? 0;
+            $data = 'Ksh.'.$data;
+        }else if($type == "lastdaily") {
+            $data = \DB::table('mpesa_transactions')->where('created_at', '>=', \Carbon\Carbon::now()->subDay()->toDateTimeString())->sum('TransAmount') ?? 0;
             $data = 'Ksh.'.$data;
         }
         return $data;
+    }
+    
+    /**
+     * Bam_Admin
+     *
+     * @param  mixed $type
+     * @param  mixed $id
+     * @return void
+     */
+    function Bam_Admin($type ='logged',$id= null){
+        if($type == 'logged'){
+            $data = Encore\Admin\Facades\Admin::user()->id;
+        }
+        return $data;
+    }
+    
+    /**
+     * Bam_Complains
+     *
+     * @param  mixed $type
+     * @param  mixed $id
+     * @return void
+     */
+    function Bam_Complains($type = null,$id = null)
+    {
+        if($type == 'all'){
+            $data = DB::table('complains')->get();
+        }else if($type == 'open'){
+            $data = DB::table('complains')->where('status',0)->get();
+        }else if($type == 'solved'){
+            $data = DB::table('complains')->where('status',2)->get();
+        }else if($type == 'onprocess'){
+            $data = DB::table('complains')->where('status',1)->get();
+        }
+        return $data;
+        # code...
     }

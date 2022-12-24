@@ -28,5 +28,9 @@ Route::group([
      * All MPESA Routes
      */
     $router->resource('mpesa-transactions', MpesaTransactionController::class);
+    /**
+     * All Compains Routes
+     */
+    $router->resource('complains', ComplainController::class);
 
 });

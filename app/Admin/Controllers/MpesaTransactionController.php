@@ -25,7 +25,10 @@ class MpesaTransactionController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new MpesaTransaction());
-        $grid->model()->latest();
+        $grid->model()->latest('id');
+        $grid->quickSearch(function ($model, $query) {
+            $model->where('Firstname', 'like',"%{$query}%")->orWhere('Lastname', 'like', "%{$query}%")->orWhere('TransID', 'like', "%{$query}%")->orWhere('BillRefNumber', 'like', "%{$query}%");
+        });
 
         // $grid->column('id', __('Id'));
         // $grid->column('FirstName', __('FirstName'));
@@ -45,7 +48,6 @@ class MpesaTransactionController extends AdminController
         // $grid->column('deleted_at', __('Deleted at'));
         // $grid->column('created_at', __('Created at'));
         // $grid->column('updated_at', __('Updated at'));
-
         $grid->id('id')->sortable();
         $grid->FirstName('First Name')->sortable();
         $grid->MiddleName('Middle Name');
@@ -54,13 +56,14 @@ class MpesaTransactionController extends AdminController
         $grid->TransID('TransID')->sortable()->label();
         $grid->TransTime('Date')->display(function ($d) {
             return  date('d - m - Y  (h:i)',strtotime($d));
-        });
-        
+        });   
         $grid->BusinessShortCode('Paybill')->sortable();
         $grid->BillRefNumber('Account')->sortable();
         $grid->MSISDN('Number')->sortable();
         $grid->TransAmount('Amount')->sortable()->label();
-
+        $grid->actions(function ($actions) {
+            $actions->disableDelete();
+        });
         return $grid;
     }
 
