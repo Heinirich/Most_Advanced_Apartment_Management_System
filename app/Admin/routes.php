@@ -32,5 +32,8 @@ Route::group([
      * All Compains Routes
      */
     $router->resource('complains', ComplainController::class);
-
+    /**
+     * Room Payment History
+     */
+    $router->get('/payhistory/{room_id}/room', 'CustomRoutesController@payhistoryroom')->name('payhistoryroom');
 });

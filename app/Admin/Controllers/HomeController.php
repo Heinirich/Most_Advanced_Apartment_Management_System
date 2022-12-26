@@ -32,7 +32,7 @@ class HomeController extends Controller
                     $this->displayInfoBox('Past 24Hours', 'dollar', 'navy', '/admin/mpesa-transactions', Bam_Transactions("lastdaily"),$column);  
                 });
                 $row->column(3, function (Column $column) {
-                    $this->displayInfoBox('Complains', 'users', 'purple', '/admin/complains', count(Bam_Complains("all")),$column);  
+                    $this->displayInfoBox('Total Complains', 'users', 'purple', '/admin/complains', count(Bam_Complains("all")),$column);  
                 });
                 $row->column(3, function (Column $column) {
                     $this->displayInfoBox('Open Complains', 'users', 'red', '/admin/complains', count(Bam_Complains("open")),$column);  
