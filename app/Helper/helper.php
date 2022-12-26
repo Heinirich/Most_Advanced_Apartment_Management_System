@@ -150,6 +150,21 @@
         return $data;
         # code...
     }
+
+    function Bam_RentCollections($type = 'all',$id = null)
+    {
+        if($type == 'all'){
+            $data = DB::table('rent_collections')->get();
+        }else if($type == 'sum'){
+            $data = DB::table('rent_collections')->sum('amount_paid');
+        }else if($type == "week") {
+            $date = \Carbon\Carbon::today()->subDays(7);
+            $data = DB::table('rent_collections')->where('created_at','>=',$date)->sum('amount_paid') ?? 0;
+            
+        }
+        return $data;
+        # code...
+    }
         
     /**
      * Bam_Months

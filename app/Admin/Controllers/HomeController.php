@@ -15,9 +15,7 @@ class HomeController extends Controller
 {
     public function index(Content $content)
     {
-        echo json_encode(Bam_Years());
-return 124;
-     
+    
         return $content
             ->title('Dashboard')
             ->description('Welcome to the admin Dashboard')
@@ -51,6 +49,12 @@ return 124;
                 });
                 $row->column(3, function (Column $column) {
                     $this->displayInfoBox('Staff', 'user', 'purple', '/admin/auth/users', count(Bam_Admin('staff')),$column);  
+                });
+                $row->column(3, function (Column $column) {
+                    $this->displayInfoBox('Total Collection', 'euro', 'black', '/admin/rent-collections',"Ksh.".Bam_RentCollections('sum'),$column);  
+                });
+                $row->column(3, function (Column $column) {
+                    $this->displayInfoBox('Last 7 days Collection', 'euro', 'navy', '/admin/rent-collections',"Ksh.".Bam_RentCollections('week'),$column);  
                 });
                 $row->column(12, function (Column $column) {
                     
