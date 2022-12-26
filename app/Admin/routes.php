@@ -41,6 +41,10 @@ Route::group([
      */
     $router->resource('rent-collections', RentCollectionController::class);
     /**
+     * Sms Communication History
+     */
+    $router->resource('sms-communications', SmsCommunicationController::class);
+    /**
      * Room Payment History
      */
     $router->get('/payhistory/{room_id}/room', 'CustomRoutesController@payhistoryroom')->name('payhistoryroom');
