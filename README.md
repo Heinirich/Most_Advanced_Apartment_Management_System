@@ -8,3 +8,4 @@ Contains The Following Features:
 3. Room Viewing and Allocation
 4. Rights/Role Provision
 5. Sms Integration
+6. Complain Management
