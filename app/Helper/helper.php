@@ -150,3 +150,48 @@
         return $data;
         # code...
     }
+        
+    /**
+     * Bam_Months
+     *
+     * @param  mixed $type
+     * @return void
+     */
+    function Bam_Months($type = 'all',$month_id = null){
+        if($type == 'all'){
+            $data = array();
+            for($i = 1 ; $i <= 12; $i++)
+            {
+                $data[] = date("F",mktime(0,0,0,$i,1,date("Y")));
+            }
+            
+        }else if($type == "specific"){
+            $data = '';
+            for($i = 1 ; $i <= 12; $i++)
+            {
+                if($month_id == $i){ 
+                    $data = date("F",mktime(0,0,0,$i,1,date("Y")));
+                    break;
+                }
+            }
+        }
+        return $data;
+    }
+    
+    /**
+     * Bam_Years
+     *
+     * @param  mixed $type
+     * @return void
+     */
+    function Bam_Years($type = 'all'){
+        
+        $data = array();
+        
+
+        for($i = (date("Y")-1) ; $i <= (date("Y")+9); $i++)
+        {
+            $data[] = $i;
+        }
+        return $data;
+    }

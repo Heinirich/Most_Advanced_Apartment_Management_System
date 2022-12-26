@@ -25,14 +25,16 @@ class RentCollectionController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new RentCollection());
-        
+        $grid->model()->latest('id');
         $grid->column('id', __('Id'));
-        $grid->column('room_id', __('Room '));
-        $grid->column('amount_paid', __('Amount paid'));
-        $grid->column('bill_date', __('Bill date'));
-        $grid->column('bill_month', __('Bill month'));
+        $grid->column('room.name', __('Room '));
+        $grid->column('amount_paid', __('Amount paid'))->label('info');
+        $grid->column('bill_date', __('Bill date'))->sortable();
+        $grid->column('bill_month', __('Bill month'))->display(function($bill_month){
+            return Bam_Months('specific',($bill_month+1));
+        })->label()->sortable();    
         $grid->column('bill_year', __('Bill year'));
-        $grid->column('bill_status', __('Bill status'));
+        $grid->column('bill_status', __('Bill status'))->switch();
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 
@@ -73,10 +75,13 @@ class RentCollectionController extends AdminController
 
         $form->select('room_id', __('Room'))->options(Bam_Rooms('plucked'));
         $form->number('amount_paid', __('Amount paid'));
-        $form->text('bill_date', __('Bill date'));
-        $form->text('bill_month', __('Bill month'));
-        $form->text('bill_year', __('Bill year'));
-        $form->text('bill_status', __('Bill status'));
+        $form->date('bill_date', __('Bill Paid Date'))->default(date('d-m-Y'));
+        $form->select('bill_month', __('Bill month'))->options(Bam_Months());
+        $form->select('bill_year', __('Bill year'))->options(Bam_Years())->default(date("Y"));
+        $form->select('bill_status', __('Bill status'))->options([
+            0 => 'Due',
+            1 => 'Paid'
+        ]);
 
         return $form;
     }
