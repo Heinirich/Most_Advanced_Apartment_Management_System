@@ -162,7 +162,7 @@
             $data = array();
             for($i = 1 ; $i <= 12; $i++)
             {
-                $data[] = date("F",mktime(0,0,0,$i,1,date("Y")));
+                $data[date("F",mktime(0,0,0,$i,1,date("Y")))] = date("F",mktime(0,0,0,$i,1,date("Y")));
             }
             
         }else if($type == "specific"){
@@ -187,11 +187,9 @@
     function Bam_Years($type = 'all'){
         
         $data = array();
-        
-
         for($i = (date("Y")-1) ; $i <= (date("Y")+9); $i++)
         {
-            $data[] = $i;
+            $data[$i] = $i;
         }
         return $data;
     }

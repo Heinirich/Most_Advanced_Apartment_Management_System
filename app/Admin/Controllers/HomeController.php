@@ -15,9 +15,7 @@ class HomeController extends Controller
 {
     public function index(Content $content)
     {
-        echo json_encode(Bam_Rooms('plucked'));
-        echo '/n';
-        echo json_encode(Bam_Months());
+        echo json_encode(Bam_Years());
 return 124;
      
         return $content

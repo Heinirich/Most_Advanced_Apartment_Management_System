@@ -30,9 +30,7 @@ class RentCollectionController extends AdminController
         $grid->column('room.name', __('Room '));
         $grid->column('amount_paid', __('Amount paid'))->label('info');
         $grid->column('bill_date', __('Bill date'))->sortable();
-        $grid->column('bill_month', __('Bill month'))->display(function($bill_month){
-            return Bam_Months('specific',($bill_month+1));
-        })->label()->sortable();    
+        $grid->column('bill_month', __('Bill month'));    
         $grid->column('bill_year', __('Bill year'));
         $grid->column('bill_status', __('Bill status'))->switch();
         $grid->column('created_at', __('Created at'));
@@ -76,7 +74,7 @@ class RentCollectionController extends AdminController
         $form->select('room_id', __('Room'))->options(Bam_Rooms('plucked'));
         $form->number('amount_paid', __('Amount paid'));
         $form->date('bill_date', __('Bill Paid Date'))->default(date('d-m-Y'));
-        $form->select('bill_month', __('Bill month'))->options(Bam_Months());
+        $form->select('bill_month', __('Bill month'))->options(Bam_Months())->default(date("m"));
         $form->select('bill_year', __('Bill year'))->options(Bam_Years())->default(date("Y"));
         $form->select('bill_status', __('Bill status'))->options([
             0 => 'Due',
