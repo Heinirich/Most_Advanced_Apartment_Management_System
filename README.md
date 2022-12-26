@@ -9,3 +9,4 @@ Contains The Following Features:
 4. Rights/Role Provision
 5. Sms Integration
 6. Complain Management
+7. Maintenance Intergration
