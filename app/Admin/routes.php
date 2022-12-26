@@ -32,6 +32,10 @@ Route::group([
      * All Compains Routes
      */
     $router->resource('complains', ComplainController::class);
+     /**
+     * Maintenances Payment History
+     */
+    $router->resource('maintenances', MaintenanceController::class);
     /**
      * Room Payment History
      */
