@@ -37,6 +37,10 @@ Route::group([
      */
     $router->resource('maintenances', MaintenanceController::class);
     /**
+     * Rent Collections History
+     */
+    $router->resource('rent-collections', RentCollectionController::class);
+    /**
      * Room Payment History
      */
     $router->get('/payhistory/{room_id}/room', 'CustomRoutesController@payhistoryroom')->name('payhistoryroom');

@@ -26,7 +26,7 @@ class MaintenanceController extends AdminController
     {
         $grid = new Grid(new Maintenance());
         $grid->model()->latest();
-        $grid->column('id', __('Id'));
+        $grid->column('id', __('Id'))->hide();
         $grid->column('maintenance_title', __('Maintenance Title'));
         $grid->column('date', __('Date'));
         $grid->column('maintenance_amount', __('Amount'));
@@ -67,10 +67,10 @@ class MaintenanceController extends AdminController
     {
         $form = new Form(new Maintenance());
 
-        $form->text('maintenance_title', __('Maintenance title'));
-        $form->number('maintenance_amount', __('Maintenance amount'));
-        $form->textarea('details', __('Details'));
-        $form->date('date', __('Date'))->default(date('Y-m-d'));
+        $form->text('maintenance_title', __('Maintenance Title'))->required();
+        $form->number('maintenance_amount', __('Amount'))->required();
+        $form->textarea('details', __('Details'))->required();
+        $form->date('date', __('Date'))->default(date('Y-m-d'))->required();
 
         return $form;
     }

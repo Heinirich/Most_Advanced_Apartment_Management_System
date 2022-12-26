@@ -111,6 +111,9 @@
     function Bam_Admin($type ='logged',$id= null){
         if($type == 'logged'){
             $data = Encore\Admin\Facades\Admin::user()->id;
+        }else if($type =='staff'){
+            $role = Encore\Admin\Auth\Database\Role::where('slug', 'staff')->first();
+            $data = $role->administrators;
         }
         return $data;
     }
@@ -132,6 +135,17 @@
             $data = DB::table('complains')->where('status',2)->get();
         }else if($type == 'onprocess'){
             $data = DB::table('complains')->where('status',1)->get();
+        }
+        return $data;
+        # code...
+    }
+
+    function Bam_Maintenance($type = 'all',$id = null)
+    {
+        if($type == 'all'){
+            $data = DB::table('maintenances')->get();
+        }else if($type == 'sum'){
+            $data = DB::table('maintenances')->sum('maintenance_amount');
         }
         return $data;
         # code...

@@ -15,6 +15,7 @@ class HomeController extends Controller
 {
     public function index(Content $content)
     {
+     
         return $content
             ->title('Dashboard')
             ->description('Welcome to the admin Dashboard')
@@ -42,6 +43,12 @@ class HomeController extends Controller
                 });
                 $row->column(3, function (Column $column) {
                     $this->displayInfoBox('Open Complains', 'users', 'green', '/admin/complains', count(Bam_Complains("solved")),$column);  
+                });
+                $row->column(3, function (Column $column) {
+                    $this->displayInfoBox('Maintenance', 'scissors', 'green', '/admin/maintenances', 'Ksh.'.Bam_Maintenance("sum"),$column);  
+                });
+                $row->column(3, function (Column $column) {
+                    $this->displayInfoBox('Staff', 'user', 'purple', '/admin/auth/users', count(Bam_Admin('staff')),$column);  
                 });
                 $row->column(12, function (Column $column) {
                     
