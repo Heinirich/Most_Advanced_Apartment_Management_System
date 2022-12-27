@@ -5,8 +5,12 @@
      *
      * @return void
      */
-    function Bam_CurrentRoute(){
-        return request()->route()->action['as'];
+    function Bam_CurrentRoute($type = 'name',$parameter = null){
+        if($type == 'name'){
+            return request()->route()->action['as'];
+        }else if($type == 'parameters'){
+            return request()->route()->parameters();
+        }
     }    
     /**
      * Bam_Tenants
@@ -160,10 +164,10 @@
         }else if($type == "week") {
             $date = \Carbon\Carbon::today()->subDays(7);
             $data = DB::table('rent_collections')->where('created_at','>=',$date)->sum('amount_paid') ?? 0;
-            
+        }else if($type == 'byroom'){
+            $data = DB::table('rent_collections')->where('room_id',$id)->latest()->get();
         }
         return $data;
-        # code...
     }
         
     /**

@@ -29,7 +29,7 @@ class RoomController extends AdminController
         $grid->quickSearch(function ($model, $query) {
             $model->where('name', 'like',"%{$query}%")->orWhere('room_slug', 'like', "%{$query}%");
         });
-        $grid->column('#', __('Payment History'))->display(function(){
+        $grid->column('#', __('History'))->display(function(){
             return '<a target="_blank" href="'.route('admin.payhistoryroom',$this->id).'" class="btn btn-success fa fa-eye"></a>';
         });
         $grid->column('id', __('Id'));  
