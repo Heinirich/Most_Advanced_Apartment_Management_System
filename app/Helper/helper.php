@@ -42,6 +42,8 @@
             $data = DB::table('rooms')->get();
         }else if($type == 'plucked'){
             $data = DB::table('rooms')->get()->pluck('name','id');
+        }else if($type ==  'byid'){
+            $data = DB::table('rooms')->where('id',$id)->first();
         }
         
         return $data;
@@ -101,6 +103,8 @@
             $data = 'Ksh.'.$data;
         }else if($type == 'latest'){
             $data = \DB::table('mpesa_transactions')->latest()->take($num)->get();
+        }else if($type == 'byroom'){
+            $data = \DB::table('mpesa_transactions')->where('Bill', '>=', )->get();
         }
         return $data;
     }

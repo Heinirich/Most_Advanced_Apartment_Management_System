@@ -33,18 +33,29 @@ class CustomRoutesController extends Controller
                 $row->column(12, function (Column $column) {
                     $headers = ['Amount Paid', 'Bill Date', 'Bill Month', 'Bill Year','Bill Status'];
                     $room_id =  Bam_CurrentRoute('parameters')['room_id'];
-                    $data = Bam_RentCollections('byroom',$room_id);
+                    $collection_data = Bam_RentCollections('byroom',$room_id);
                     $response = array();
-                    foreach ($data as $datum) {
+                    foreach ($collection_data as $datum) {
                         $response[] = array("Ksh.".$datum->amount_paid,$datum->bill_date,$datum->bill_month,$datum->bill_year,$datum->bill_status==0?'Due':'Paid');
                     }
                     $rows = $response;
+                    $collection = new Table($headers, $rows);
 
-                    $table = new Table($headers, $rows);
+                    $room_id =  Bam_CurrentRoute('parameters')['room_id'];
+                    $room_slug = Bam_Rooms('byid',$room_id);
+                    
+                    $collection_data = Bam_RentCollections('byroom',$room_id);
+                    $response = array();
+                    foreach ($collection_data as $datum) {
+                        $response[] = array("Ksh.".$datum->amount_paid,$datum->bill_date,$datum->bill_month,$datum->bill_year,$datum->bill_status==0?'Due':'Paid');
+                    }
+                    $rows = $response;
+                    $collection = new Table($headers, $rows);
+
 
                     $tab = new Tab();
                     $tab->add('Payment History', view('admin.payments.room'));
-                    $tab->add('Collection History', $table->render());
+                    $tab->add('Collection History', $collection->render());
                     $column->append($tab->render());
                 });
             })
