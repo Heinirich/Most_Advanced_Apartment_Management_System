@@ -93,7 +93,7 @@
      * @param  mixed $type
      * @return void
      */
-    function Bam_Transactions($type = "all",$num = 10)
+    function Bam_Transactions($type = "all",$num = 10,$hostel_slug = null)
     {
         if ($type == "lastbalance") {
             $data = \DB::table('mpesa_transactions')->latest()->pluck('OrgAccountBalance')->first() ?? 0;
@@ -104,7 +104,7 @@
         }else if($type == 'latest'){
             $data = \DB::table('mpesa_transactions')->latest()->take($num)->get();
         }else if($type == 'byroom'){
-            $data = \DB::table('mpesa_transactions')->where('Bill', '>=', )->get();
+            $data = \DB::table('mpesa_transactions')->where('BillRefNumber',$hostel_slug )->get();
         }
         return $data;
     }

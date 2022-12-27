@@ -40,10 +40,19 @@ Route::group([
      * Rent Collections History
      */
     $router->resource('rent-collections', RentCollectionController::class);
+    
     /**
-     * Sms Communication History
+     * All Sms Communication History
      */
-    $router->resource('sms-communications', SmsCommunicationController::class);
+    $router->resource('all-sms-communications', AllSmsCommuniationController::class);
+    /**
+     * Single Sms Communication History
+     */
+    $router->resource('single-sms-communications', SingleSmsCommuniationController::class);
+    /**
+     * Sms Log History
+     */
+    $router->resource('sms-logs', SmsLogController::class);
     /**
      * Room Payment History
      */

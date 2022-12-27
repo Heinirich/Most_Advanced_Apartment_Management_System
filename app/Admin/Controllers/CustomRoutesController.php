@@ -42,24 +42,25 @@ class CustomRoutesController extends Controller
                     $collection = new Table($headers, $rows);
 
                     $room_id =  Bam_CurrentRoute('parameters')['room_id'];
-                    $room_slug = Bam_Rooms('byid',$room_id);
+                    $room_slug = Bam_Rooms('byid',$room_id)->room_slug;
                     
-                    $collection_data = Bam_RentCollections('byroom',$room_id);
+                    $payment_data = Bam_Transactions($type = "byroom",$hostel_slug = $room_slug);
                     $response = array();
-                    foreach ($collection_data as $datum) {
-                        $response[] = array("Ksh.".$datum->amount_paid,$datum->bill_date,$datum->bill_month,$datum->bill_year,$datum->bill_status==0?'Due':'Paid');
+                    foreach ($payment_data as $datum) {
+                        $response[] = array("Ksh.".$datum->TransAmount,$datum->FirstName.' '.$datum->MiddleName.'('.$datum->MSISDN.')',date('d - m - Y  (h:i)',strtotime($datum->TransTime)));
                     }
+                    $headers = ['Amount', 'Paid By', 'Date'];
                     $rows = $response;
-                    $collection = new Table($headers, $rows);
+                    $payment = new Table($headers, $rows);
 
 
                     $tab = new Tab();
-                    $tab->add('Payment History', view('admin.payments.room'));
+                    $tab->add('Payment History',new Box('Mpesa Payments', $payment->render()));
                     $tab->add('Collection History', $collection->render());
                     $column->append($tab->render());
                 });
-            })
-            ->body(new Box($description, view('admin.payments.room')));
+            });
+            // ->body(new Box($description, view('admin.payments.room')));
         // return ;
         
     }
