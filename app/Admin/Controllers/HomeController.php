@@ -18,7 +18,7 @@ class HomeController extends Controller
     
         return $content
             ->title('Dashboard')
-            ->description('Welcome to the admin Dashboard')
+            ->description('Welcome to the The Admin Dashboard')
             ->row(function (Row $row) {
                 $row->column(3, function (Column $column) {
                     $this->displayInfoBox('Tenants', 'users', 'blue', '/admin/tenants', count(Bam_Tenants("all")),$column);  
