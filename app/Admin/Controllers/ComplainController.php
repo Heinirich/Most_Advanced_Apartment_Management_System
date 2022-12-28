@@ -28,7 +28,7 @@ class ComplainController extends AdminController
         $grid->model()->latest();
 
         $grid->column('id', __('Id'));
-        $grid->column('room.name', __('Room'))->help('This is room name.');;
+        $grid->column('room.name', __('Room'))->help('This is room name.');
         $grid->column('user.name',__('Tenant'));
         //'user_id', __('User')
         $grid->column('body', __('Body'))->hide();

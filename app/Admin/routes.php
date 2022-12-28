@@ -58,6 +58,10 @@ Route::group([
      */
     $router->resource('room-allocations', RoomAllocationController::class);
     /**
+     * Settings
+     */
+    $router->resource('settings', SettingController::class);
+    /**
      * Room Payment History
      */
     $router->get('/payhistory/{room_id}/room', 'CustomRoutesController@payhistoryroom')->name('payhistoryroom');

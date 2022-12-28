@@ -15,7 +15,7 @@ class SmsLogController extends AdminController
      *
      * @var string
      */
-    protected $title = 'SmsLog';
+    protected $title = 'Sms Logs';
 
     /**
      * Make a grid builder.
@@ -29,7 +29,13 @@ class SmsLogController extends AdminController
         $grid->column('id', __('Id'));
         $grid->column('sms', __('Sms'));
         $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
+        $grid->column('updated_at', __('Updated at'))->hide();
+
+        $grid->disableCreateButton();
+        $grid->actions(function ($actions) {
+            $actions->disableDelete();
+        });
+
 
         return $grid;
     }
@@ -48,7 +54,9 @@ class SmsLogController extends AdminController
         $show->field('sms', __('Sms'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
-
+        $show->panel()->tools(function ($tools) {
+            $tools->disableDelete();
+        });
         return $show;
     }
 
@@ -61,8 +69,10 @@ class SmsLogController extends AdminController
     {
         $form = new Form(new SmsLog());
 
-        $form->text('sms', __('Sms'));
-
+        $form->text('sms', __('Sms'))->readonly();
+        $form->tools(function (Form\Tools $tools) {
+            $tools->disableDelete();
+        });
         return $form;
     }
 }

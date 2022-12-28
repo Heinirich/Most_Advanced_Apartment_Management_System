@@ -32,34 +32,26 @@ class SingleSmsCommuniationController extends AdminController
         $grid->model()->latest()->where('is_single','specific');
 
         $grid->column('id', __('Id'));
-        //$grid->column('sms_body', __('Sms body'));
+        $grid->column('sms_body', __('Sms body'))->hide();
         $grid->column('sms_status', __('Sms status'))->display(function($sms_status){
             if($sms_status == 1){
                 $sms_status = 'Sent';
             }else{
                 $sms_status = 'Pending';
             }
-            
             return $sms_status;
         })->label([
             '1'=>'success',
             '0' => 'info'
         ])->sortable();
-        $grid->column('receiver_id', __('Receiver'))->display(function($receiver_id){
-            return \DB::table('users')
-            ->where('id', $receiver_id)
-            ->pluck('name')
-            ->first();
-        });
-        $grid->column('sender_id', __('Sender Admin'))->display(function($sender_id){
-            return \DB::table('admin_users')
-            ->where('id', $sender_id)
-            ->pluck('username')
-            ->first();
-        })->label('success');
+        $grid->column('user.name', __('Receiver'));
+        $grid->column('adminuser.name', __('Sender Admin'))->label('success');
         $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
-
+        $grid->column('updated_at', __('Updated at'))->hide();
+        $grid->actions(function ($actions) {
+            $actions->disableDelete();
+        });
+        
         return $grid;
     }
 
@@ -75,11 +67,16 @@ class SingleSmsCommuniationController extends AdminController
 
         $show->field('id', __('Id'));
         $show->field('sms_body', __('Sms body'));
-        $show->field('sms_status', __('Sms status'));
-        $show->field('sender_id', __('Sender id'));
+        $show->field('sms_status', __('Sms status'))->using([
+            '1'=>'success',
+            '0' => 'Pending'
+        ])->label();
+        //$show->field('sender_id', __('Sender id'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
-
+        $show->panel()->tools(function ($tools) {
+            $tools->disableDelete();
+        });
         return $show;
     }
 
@@ -129,6 +126,12 @@ class SingleSmsCommuniationController extends AdminController
         $form->html($sms_limit);
         $form->hidden('sender_id', __('Sender id'))->value(Admin::user()->id);
         $form->hidden('is_single')->value('specific');
+        if(Bam_CurrentRoute('name') == 'admin.single-sms-communications.edit'){
+            $form->disableSubmit();
+            $form->disableReset();
+        }
+        
+
         $form->saved(function (Form $form) {
 
             $success = new MessageBag([
@@ -137,6 +140,9 @@ class SingleSmsCommuniationController extends AdminController
             ]);
            
             //return back()->with(compact('success'));
+        });
+        $form->tools(function (Form\Tools $tools) {
+            $tools->disableDelete();
         });
         return $form;
     }
