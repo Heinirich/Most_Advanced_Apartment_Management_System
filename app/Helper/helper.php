@@ -1,4 +1,9 @@
 <?php
+    function Bam_Setting()
+    {
+        $data = DB::table('settings')->latest()->first();
+        return $data;
+    }
     
     /**
      * Bam_CurrentRoute
@@ -99,10 +104,10 @@
     {
         if ($type == "lastbalance") {
             $data = \DB::table('mpesa_transactions')->latest()->pluck('OrgAccountBalance')->first() ?? 0;
-            $data = 'Ksh.'.$data;
+            $data = Bam_Setting()->currency_sign.$data;
         }else if($type == "lastdaily") {
             $data = \DB::table('mpesa_transactions')->where('created_at', '>=', \Carbon\Carbon::now()->subDay()->toDateTimeString())->sum('TransAmount') ?? 0;
-            $data = 'Ksh.'.$data;
+            $data = Bam_Setting()->currency_sign.$data;
         }else if($type == 'latest'){
             $data = \DB::table('mpesa_transactions')->latest()->take($num)->get();
         }else if($type == 'byroom'){

@@ -44,7 +44,9 @@ class RoomController extends AdminController
         $grid->column('status', __('Status'))->switch();
         $grid->created_at('Created at')->display(function ($created) {return date('Y-m-d ', strtotime($created));});
         $grid->column('updated_at', __('Updated at'))->display(function ($updated) {return date('Y-m-d ', strtotime($updated));});
-
+        $grid->actions(function ($actions) {
+            $actions->disableDelete();
+        });
         return $grid;
     }
 
@@ -66,7 +68,9 @@ class RoomController extends AdminController
         $show->field('status', __('Status'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
-
+        $show->panel()->tools(function ($tools) {
+            $tools->disableDelete();
+        });
         return $show;
     }
 
@@ -91,7 +95,9 @@ class RoomController extends AdminController
         $form->image('image', __('Image'))->default('images/default.png');
         $form->textarea('details', __('Details'));
         $form->switch('status', __('Status'))->default('1');
-        
+        $form->tools(function (Form\Tools $tools) {
+            $tools->disableDelete();
+        });
         return $form;
     }
 }

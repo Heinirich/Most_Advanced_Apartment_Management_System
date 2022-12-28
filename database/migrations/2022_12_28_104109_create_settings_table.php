@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('bambanet_sms_api_key');
             $table->string('bambanet_sms_api_secret');
             $table->string('license_key');
+            $table->string('currency_sign')->default('Ksh.');
             $table->timestamps();
         });
     }

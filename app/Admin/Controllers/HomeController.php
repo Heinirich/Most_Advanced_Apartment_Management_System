@@ -45,16 +45,16 @@ class HomeController extends Controller
                     $this->displayInfoBox('Open Complains', 'users', 'green', '/admin/complains', count(Bam_Complains("solved")),$column);  
                 });
                 $row->column(3, function (Column $column) {
-                    $this->displayInfoBox('Maintenance', 'scissors', 'green', '/admin/maintenances', 'Ksh.'.Bam_Maintenance("sum"),$column);  
+                    $this->displayInfoBox('Maintenance', 'scissors', 'green', '/admin/maintenances', Bam_Setting()->currency_sign.Bam_Maintenance("sum"),$column);  
                 });
                 $row->column(3, function (Column $column) {
                     $this->displayInfoBox('Staff', 'user', 'purple', '/admin/auth/users', count(Bam_Admin('staff')),$column);  
                 });
                 $row->column(3, function (Column $column) {
-                    $this->displayInfoBox('Total Collection', 'euro', 'black', '/admin/rent-collections',"Ksh.".Bam_RentCollections('sum'),$column);  
+                    $this->displayInfoBox('Total Collection', 'euro', 'black', '/admin/rent-collections',Bam_Setting()->currency_sign.Bam_RentCollections('sum'),$column);  
                 });
                 $row->column(3, function (Column $column) {
-                    $this->displayInfoBox('Last 7 days Collection', 'euro', 'navy', '/admin/rent-collections',"Ksh.".Bam_RentCollections('week'),$column);  
+                    $this->displayInfoBox('Last 7 days Collection', 'euro', 'navy', '/admin/rent-collections',Bam_Setting()->currency_sign.Bam_RentCollections('week'),$column);  
                 });
                 $row->column(12, function (Column $column) {
                     

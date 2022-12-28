@@ -61,6 +61,7 @@ class MpesaTransactionController extends AdminController
         $grid->BillRefNumber('Account')->sortable();
         $grid->MSISDN('Number')->sortable();
         $grid->TransAmount('Amount')->sortable()->label();
+        $grid->disableCreateButton();
         $grid->actions(function ($actions) {
             $actions->disableDelete();
         });
@@ -95,7 +96,9 @@ class MpesaTransactionController extends AdminController
         $show->field('deleted_at', __('Deleted at'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
-
+        $show->panel()->tools(function ($tools) {
+            $tools->disableDelete();
+        });
         return $show;
     }
 
@@ -122,7 +125,9 @@ class MpesaTransactionController extends AdminController
         $form->decimal('TransAmount', __('TransAmount'));
         $form->text('Confirmed', __('Confirmed'));
         $form->decimal('OrgAccountBalance', __('OrgAccountBalance'));
-
+        $form->tools(function (Form\Tools $tools) {
+            $tools->disableDelete();
+        });
         return $form;
     }
 }

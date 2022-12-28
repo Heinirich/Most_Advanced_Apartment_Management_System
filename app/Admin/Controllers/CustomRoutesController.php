@@ -36,7 +36,7 @@ class CustomRoutesController extends Controller
                     $collection_data = Bam_RentCollections('byroom',$room_id);
                     $response = array();
                     foreach ($collection_data as $datum) {
-                        $response[] = array("Ksh.".$datum->amount_paid,$datum->bill_date,$datum->bill_month,$datum->bill_year,$datum->bill_status==0?'Due':'Paid');
+                        $response[] = array(Bam_Setting()->currency_sign.$datum->amount_paid,$datum->bill_date,$datum->bill_month,$datum->bill_year,$datum->bill_status==0?'Due':'Paid');
                     }
                     $rows = $response;
                     $collection = new Table($headers, $rows);
@@ -47,7 +47,7 @@ class CustomRoutesController extends Controller
                     $payment_data = Bam_Transactions($type = "byroom",$hostel_slug = $room_slug);
                     $response = array();
                     foreach ($payment_data as $datum) {
-                        $response[] = array("Ksh.".$datum->TransAmount,$datum->FirstName.' '.$datum->MiddleName.'('.$datum->MSISDN.')',date('d - m - Y  (h:i)',strtotime($datum->TransTime)));
+                        $response[] = array(Bam_Setting()->currency_sign.$datum->TransAmount,$datum->FirstName.' '.$datum->MiddleName.'('.$datum->MSISDN.')',date('d - m - Y  (h:i)',strtotime($datum->TransTime)));
                     }
                     $headers = ['Amount', 'Paid By', 'Date'];
                     $rows = $response;

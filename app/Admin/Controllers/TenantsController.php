@@ -28,16 +28,18 @@ class TenantsController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new User());
-
+        $grid->model()->latest();
         $grid->column('id', __('Id'));
         $grid->column('name', __('Name'));
         $grid->column('email', __('Email'));
-        $grid->column('email_verified_at', __('Email verified at'));
-        $grid->column('password', __('Password'));
-        $grid->column('remember_token', __('Remember token'));
+        $grid->column('email_verified_at', __('Email verified at'))->hide();
+        $grid->column('password', __('Password'))->hide();
+        $grid->column('remember_token', __('Remember token'))->hide();
         $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
-
+        $grid->column('updated_at', __('Updated at'))->hide();
+        $grid->actions(function ($actions) {
+            $actions->disableDelete();
+        });
         return $grid;
     }
 
@@ -59,7 +61,9 @@ class TenantsController extends AdminController
         $show->field('remember_token', __('Remember token'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
-
+        $show->panel()->tools(function ($tools) {
+            $tools->disableDelete();
+        });
         return $show;
     }
 
@@ -90,6 +94,10 @@ class TenantsController extends AdminController
             if ($form->password && $form->model()->password != $form->password) {
                 $form->password = Hash::make($form->password);
             }
+        });
+
+        $form->tools(function (Form\Tools $tools) {
+            $tools->disableDelete();
         });
         return $form;
     }

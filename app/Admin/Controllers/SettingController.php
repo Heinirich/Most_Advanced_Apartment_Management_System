@@ -30,6 +30,7 @@ class SettingController extends AdminController
         $grid->column('bambanet_sms_api_key', __('Bambanet Api Key'))->editable()->help('Edit directly from here.');;
         $grid->column('bambanet_sms_api_secret', __('Bambanet Api Secret'))->editable()->help('Edit directly from here.');;
         $grid->column('license_key', __('License key'));
+        $grid->column('currency_sign', __('Currency Sign'))->editable()->help('Edit directly from here.');
         $grid->column('created_at', __('Created at'))->hide();
         $grid->column('updated_at', __('Updated at'))->hide();
 
@@ -84,6 +85,7 @@ class SettingController extends AdminController
         $form->text('bambanet_sms_api_key', __('Bambanet Sms Api Key'));
         $form->text('bambanet_sms_api_secret', __('Bambanet Sms Api secret'));
         $form->text('license_key', __('License key'));
+        $form->text('currency_sign', __('Currency Sign'));
 
         $form->setWidth(10, 2);
         $form->tools(function (Form\Tools $tools) {
