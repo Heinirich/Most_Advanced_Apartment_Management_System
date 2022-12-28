@@ -27,6 +27,9 @@ class SmsUsers extends Command
      */
     public function handle()
     {
+        foreach(Bam_Rooms('all') as $room){
+            echo Bam_CurrentTenant($room->id);
+        }
         return Command::SUCCESS;
     }
 }
