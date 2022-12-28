@@ -24,6 +24,8 @@
             $data = DB::table('users')->get();
         }else if($type == 'plucked'){
             $data = DB::table('users')->get()->pluck('name','id');
+        }else if($type == 'byid'){
+            $data = DB::table('users')->where('id',$id)->first();
         }
         return $data;
         # code...
@@ -201,6 +203,16 @@
         return $data;
     }
     
+    function Bam_CurrentTenant($id = null){
+        $data = DB::table('room_allocations')->where('room_id',$id)->latest()->count()?DB::table('room_allocations')->where('room_id',$id)->latest()->pluck('tenant_id')->first():0;
+        
+        if($data == '0'){
+            return 'Empty';
+        }else{
+            return Bam_Tenants('byid',$data)->name;
+        }
+        
+    }
     /**
      * Bam_Years
      *

@@ -34,6 +34,9 @@ class RoomController extends AdminController
         });
         $grid->column('id', __('Id'));  
         $grid->column('name', __('Name'));
+        $grid->column('tenat', __('Current Tenant'))->display(function(){
+            return Bam_CurrentTenant($this->id);
+        });
         $grid->column('room_slug', __('Room Identifier Number(RIN)'));
         $grid->column('price', __('Price'));
         $grid->column('image', __('Image'))->image(config('filesystem.admin.url'),50,50);
