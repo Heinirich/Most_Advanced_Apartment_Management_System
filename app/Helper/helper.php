@@ -208,12 +208,17 @@
         return $data;
     }
     
-    function Bam_CurrentTenant($id = null){
+    function Bam_CurrentTenant($id = null,$type = 'data'){
+
+        
         $data = DB::table('room_allocations')->where('room_id',$id)->latest()->count()?DB::table('room_allocations')->where('room_id',$id)->latest()->pluck('tenant_id')->first():0;
         
         if($data == '0'){
             return 'Empty';
         }else{
+            if($type == 'data'){
+                return Bam_Tenants('byid',$data);
+            }
             return Bam_Tenants('byid',$data)->name;
         }
         
