@@ -11,3 +11,4 @@ Contains The Following Features:
 6. Complain Management
 7. Maintenance Intergration
 8. Admin Dashboard
+9. Fully Licensed Software

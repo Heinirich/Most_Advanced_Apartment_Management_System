@@ -11,7 +11,7 @@ return [
     | login page.
     |
     */
-    'name' => 'Bambanet-Homes',
+    'name' => 'Bambanet-Apartments(Non-Tenant) Login',
 
     /*
     |--------------------------------------------------------------------------
@@ -22,7 +22,7 @@ return [
     | `img` tag, eg '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo' => '<b>Bambanet</b> Homes',
+    'logo' => '<b>Bambanet</b> Apartment',
 
     /*
     |--------------------------------------------------------------------------
@@ -34,7 +34,7 @@ return [
     | '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo-mini' => '<b>BH</b>',
+    'logo-mini' => '<b>BA</b>',
 
     /*
     |--------------------------------------------------------------------------
@@ -299,7 +299,7 @@ return [
     | This value is used to set the background image of login page.
     |
     */
-    'login_background_image' => '',
+    'login_background_image' => '/background.jpg',
 
     /*
     |--------------------------------------------------------------------------
