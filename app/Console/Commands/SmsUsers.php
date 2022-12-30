@@ -32,11 +32,7 @@ class SmsUsers extends Command
         foreach(Bam_Rooms('all') as $room){
             $users = Bam_CurrentTenant($room->id,'data');
                 foreach ($users as $key => $user) {
-                    $username = env('AFRICASTALKING_USERNAME'); 
-                    $apiKey   = env('AFRICASTALKING_API_KEY');
-                    $from       = env('SENDER_ID');               
-                    $AT       = new AfricasTalking($username, $apiKey);
-                    $sms      = $AT->sms();
+                    
                     $recipients = $user->phone_number;
                     $message = $sms_group->sms_body;
                     try {
