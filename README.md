@@ -12,4 +12,4 @@ Contains The Following Features:
 7. Complain Management
 8. Maintenance Tracking
 9. Clean Reports
-10. Fully Licensed Software
+10. Fully Licensed Software# bambanet_codecanyon_apart-emt
