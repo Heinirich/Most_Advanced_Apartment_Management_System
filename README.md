@@ -1,5 +1,5 @@
 
-# Bambanet_Hostels
+# Official Bambanet Most Advanced Modern APARTMENT MANAGEMENT System
 Official Bambanet Most Advanced Modern APARTMENT MANAGEMENT System
 
 Username: admin  
