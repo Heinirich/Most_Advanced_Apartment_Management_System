@@ -1,6 +1,10 @@
 
 # Bambanet_Hostels
-Official Bambanet Apartmen (Non-Tenant) Login
+Official Most Advanced Modern APARTMENT MANAGEMENT System Script
+
+Username: admin
+Password : admin
+Link : https://apartmentnontenant.wisp.co.ke/admin
 
 Contains The Following Features:
 1. Mpesa Integration
