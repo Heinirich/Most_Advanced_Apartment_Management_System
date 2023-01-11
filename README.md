@@ -1,6 +1,6 @@
 
 # Bambanet_Hostels
-Official Most Advanced Modern APARTMENT MANAGEMENT System Script
+Official Bambanet Most Advanced Modern APARTMENT MANAGEMENT System
 
 Username: admin  
 Password : admin  
