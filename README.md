@@ -41,6 +41,8 @@ Dashboard Screenshot
 
 Dont forget to star the project. 
 
+Check our company profile website [https://bambanet.com/](https://bambanet.com/)   
+
 Any donations to my ***paypal***  **smithheinrich254@gmail.com** will be ***highly*** appreciated
 
 If you need customization like : ***Payment Intergration*** Like ***Bank*** Payments and the likes of ***M-Pesa, Paypal etc*** let me know.   
@@ -50,4 +52,4 @@ Check my portfolio [https://www.heinrichsmithdev.cf/?i=1](https://www.heinrichsm
 
 If you need any BESPOKE software or OF THE SHELF customization let me know. 
 
-Check our company profile website [https://bambanet.com/](https://bambanet.com/)   
+
