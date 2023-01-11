@@ -41,6 +41,7 @@ Dashboard Screenshot
 
 Dont forget to star the project. 
 
+Any donations to my ***paypal***  **smithheinrich254@gmail.com** will be ***highly*** appreciated
 
 If you need customization like : ***Payment Intergration*** Like ***Bank*** Payments and the likes of ***M-Pesa, Paypal etc*** let me know.   
 Whatsapp +254746273465 or email [smithheinrich254@gmail.com](mailto:smithheinrich254@gmail.com)   
