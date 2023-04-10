@@ -4,8 +4,8 @@ Official Bambanet Most Advanced Modern APARTMENT MANAGEMENT System
 
 Username: admin  
 Password : admin  
-Link : [Click Link for Demo](https://apartmentnontenant.wisp.co.ke/admin)  
-Link : https://apartmentnontenant.wisp.co.ke/admin
+Link : [Click Link for Demo](https://softwares.wcib.org/admin)  
+Link : https://softwares.wcib.org/admin
 
 
 Dashboard Screenshot
